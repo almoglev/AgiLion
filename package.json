@@ -1,0 +1,11 @@
+{
+  "name": "agilion",
+  "version": "1.0.0",
+  "description": "Tech support ticket app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "author": "Almog Lev",
+  "license": "MIT"
+}
