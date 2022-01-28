@@ -67,6 +67,19 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 })
 
+// @desc    Get current user details
+// @route   /api/users/me
+// @access  Private
+const getMe = asyncHandler(async (req, res) => {
+    // req.user has all info about the user from db, but we want to send only the id, name and email to the frontend
+    const user = {
+        id: req.user._id,
+        emai: req.user.email,
+        name: req.user.name,
+    }
+    res.status(200).json(user)
+})
+
 // Generate JWT token
 const generateToken = (id) => {
     return jwt.sign({id}, process.env.JWT_SECRET, {
@@ -76,5 +89,6 @@ const generateToken = (id) => {
 
 module.exports = {
     registerUser,
-    loginUser
+    loginUser,
+    getMe
 }
