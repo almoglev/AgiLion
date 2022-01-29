@@ -364,7 +364,7 @@ footer {
   color: transparent;
 }
 
-.loadingSpinnerContainer {
+/* .loadingSpinnerContainer {
   position: fixed;
   top: 0;
   right: 0;
@@ -393,7 +393,7 @@ footer {
   100% {
     transform: rotate(360deg);
   }
-}
+} */
 
 @media (max-width: 600px) {
   .boxes {

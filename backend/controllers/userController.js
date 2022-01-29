@@ -62,6 +62,7 @@ const loginUser = asyncHandler(async (req, res) => {
             token: generateToken(user._id)
         })
     } else {
+        console.log(user)
         res.status(401)
         throw new Error('Invalid credentials')
     }
