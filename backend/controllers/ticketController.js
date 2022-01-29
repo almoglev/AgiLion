@@ -19,6 +19,36 @@ const getTickets = asyncHandler(async (req, res) => {
     res.status(200).json(tickets)
 })
 
+// @desc    Get current user specific ticket
+// @route   GET /api/tickets/:id
+// @access  Private
+const getTicketById = asyncHandler(async (req, res) => {
+    // Get user using the id in the JWT
+    const user = await User.findById(req.user.id)
+
+    // If user does not exist
+    if (!user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    const ticket = await Ticket.findById(req.params.id)
+
+    // If ticket does not exist
+    if (!ticket) {
+        res.status(404)
+        throw new Error('Ticket not found')
+    }
+
+    // If the ticket does not belong to the user
+    if(ticket.user.toString() !== req.user.id) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
+
+    res.status(200).json(ticket)
+})
+
 // @desc    Create a new ticket
 // @route   POST /api/tickets
 // @access  Private
@@ -49,7 +79,73 @@ const createTicket = asyncHandler(async (req, res) => {
 
 })
 
+// @desc    Delete ticket of the current user by ticket id
+// @route   DELETE /api/tickets/:id
+// @access  Private
+const deleteTicketById = asyncHandler(async (req, res) => {
+    // Get user using the id in the JWT
+    const user = await User.findById(req.user.id)
+
+    // If user does not exist
+    if (!user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    const ticket = await Ticket.findById(req.params.id)
+
+    // If ticket does not exist
+    if (!ticket) {
+        res.status(404)
+        throw new Error('Ticket not found')
+    }
+
+    // If the ticket does not belong to the user
+    if(ticket.user.toString() !== req.user.id) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
+
+    await ticket.remove()
+    res.status(200).json({success: true})
+})
+
+// @desc    Update current user specific ticket
+// @route   PUT /api/tickets/:id
+// @access  Private
+const updateTicketById = asyncHandler(async (req, res) => {
+    // Get user using the id in the JWT
+    const user = await User.findById(req.user.id)
+
+    // If user does not exist
+    if (!user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    const ticket = await Ticket.findById(req.params.id)
+
+    // If ticket does not exist
+    if (!ticket) {
+        res.status(404)
+        throw new Error('Ticket not found')
+    }
+
+    // If the ticket does not belong to the user
+    if(ticket.user.toString() !== req.user.id) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
+
+    const updatedTicket = await Ticket.findByIdAndUpdate(req.params.id, req.body { new: true })
+
+    res.status(200).json(updatedTicket)
+})
+
 module.exports = {
     getTickets,
-    createTicket
+    getTicketById,
+    createTicket,
+    deleteTicketById,
+    updateTicketById
 }

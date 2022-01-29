@@ -1,9 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const {protect} = require('../middleware/authMiddleware')
-const {getTickets, createTicket} = require('../controllers/ticketController')
+const {getTickets, getTicketById, createTicket, deleteTicketById, updateTicketById} = require('../controllers/ticketController')
 
-// Post requests (go to userController.js)
+// The requests (go to ticketController.js)
 router.route('/').get(protect, getTickets).post(protect, createTicket)
+router.route('/:id').get(protect, getTicketById).delete(protect, deleteTicketById).put(protect, updateTicketById)
 
 module.exports = router
