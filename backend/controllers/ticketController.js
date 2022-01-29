@@ -137,7 +137,7 @@ const updateTicketById = asyncHandler(async (req, res) => {
         throw new Error('User not authorized')
     }
 
-    const updatedTicket = await Ticket.findByIdAndUpdate(req.params.id, req.body { new: true })
+    const updatedTicket = await Ticket.findByIdAndUpdate(req.params.id, req.body, { new: true })
 
     res.status(200).json(updatedTicket)
 })
