@@ -19,7 +19,7 @@ app.use(express.urlencoded({extended: false}))
 
 // Create route with express
 app.get('/', (req, res) => {
-    res.status(200).json({message: 'Welcome to Agilion API'})
+    res.status(200).json({message: 'Welcome to AgiLion API'})
 })
 
 // Routes

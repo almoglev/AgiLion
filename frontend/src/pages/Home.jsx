@@ -6,7 +6,8 @@ function Home() {
     return( 
         <>
             <section className='heading'>
-                <h1>What do you need help with?</h1>
+                <h1 className='logo'>AgiLion - your ticket support system</h1>
+                <h3>So... what do you need help with?</h3>
                 <p>Please choose an option below</p>
             </section>
 
