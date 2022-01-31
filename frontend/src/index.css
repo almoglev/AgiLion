@@ -243,13 +243,13 @@ h3 {
   border-radius: 10px;
 }
 
-.status-open {
+.status-active {
   background-color: steelblue;
   color: #fff;
   border-radius: 10px;
 }
 
-.status-closed {
+.status-done {
   background-color: darkred;
   color: #fff;
   border-radius: 10px;
