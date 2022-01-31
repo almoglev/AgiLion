@@ -3,7 +3,8 @@ import { useSelector, dispatch, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { createTicket, reset } from '../features/tickets/ticketsSlice'
-import Spinner from '../components/Spinner' 
+import Spinner from '../components/Spinner'
+import BackButton from '../components/BackButton'
 
 function NewTicket() {
     const {user} = useSelector((state) => state.auth)
@@ -42,6 +43,7 @@ function NewTicket() {
 
   return (
       <>
+        <BackButton url='/' />
         <section className='heading'>
             <h1>Create a New Ticket</h1>
             <p>Please fill out the form below</p>
@@ -90,6 +92,7 @@ function NewTicket() {
                 </div>
             </form>
         </section>
+        <br />
       </>
   )
 }
