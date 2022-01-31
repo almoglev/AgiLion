@@ -5,7 +5,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {useParams, useNavigate} from 'react-router-dom'
 import {toast} from 'react-toastify'
 import {getTicketById, closeTicketById} from '../features/tickets/ticketsSlice'
-import {getNotes, reset as notesReset, createNote} from '../features/notes/noteSlice'
+import {getNotes, createNote} from '../features/notes/noteSlice'
 import Spinner from '../components/Spinner'
 import BackButton from '../components/BackButton'
 import NoteItem from '../components/NoteItem'
@@ -28,9 +28,8 @@ function SingleTicket() {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [noteText, setNoteText] = useState("")
 
-  const {ticket, isLoading, isSuccess, isError, message} = useSelector((state) => state.tickets)
+  const {ticket, isLoading, isError, message} = useSelector((state) => state.tickets)
   const {notes, isLoading: notesIsLoading} = useSelector((state) => state.notes)
-  const params = useParams()
   const {ticketId} = useParams()
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -91,7 +90,7 @@ function SingleTicket() {
           <p>{ticket.description}</p>
         </div>
         <h2>Notes</h2>
-        {(!notes || notes.length == 0) && <h4>No notes yet</h4>}
+        {(!notes || notes.length === 0) && <h4>No notes yet</h4>}
       </header>
 
       {ticket.status !== 'done' && (
