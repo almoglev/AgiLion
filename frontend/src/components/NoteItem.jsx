@@ -2,7 +2,6 @@ import React from 'react';
 import {useSelector} from 'react-redux'
 
 function NoteItem({note}) {
-    console.log(note)
     const {user} = useSelector((state) => state.auth)
   return( 
     <div className='note' style={{
