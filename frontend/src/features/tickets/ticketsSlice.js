@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { set } from 'mongoose'
 import ticketService from './ticketsService'
 
 const initialState = {
@@ -29,6 +28,19 @@ export const getTickets = createAsyncThunk('tickets/getAll', async (_, thunkAPI)
     try {
         const token = thunkAPI.getState().auth.user.token
         return await ticketService.getTickets(token)
+    } catch (error) {
+        const message = (error.response && error.response.data && error.response.data.message)
+                        || error.message || error.toString()
+
+                        return thunkAPI.rejectWithValue(message)
+    }
+})
+
+// Get a ticket of a user by ticketId
+export const getTicketById = createAsyncThunk('tickets/get', async (ticketId, thunkAPI) => {
+    try {
+        const token = thunkAPI.getState().auth.user.token
+        return await ticketService.getTicketById(ticketId, token)
     } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message)
                         || error.message || error.toString()
@@ -67,6 +79,19 @@ export const ticketSlice = createSlice({
             state.tickets = action.payload
         })
         .addCase(getTickets.rejected, (state, action) => {
+            state.isLoading = false
+            state.isError = true
+            state.message = action.payload
+        })
+        .addCase(getTicketById.pending, (state) => {
+            state.isLoading = true
+        })
+        .addCase(getTicketById.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.ticket = action.payload
+        })
+        .addCase(getTicketById.rejected, (state, action) => {
             state.isLoading = false
             state.isError = true
             state.message = action.payload
