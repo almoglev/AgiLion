@@ -2,7 +2,7 @@
 
 AgiLion is a ticket support system, where you can sign in, ask questions, write notes, view all your tickets and of course- get help from the support staff!<br />
 It's a hands-on MERN project I developed while self-learning the course [React Front To Back 2022](https://www.udemy.com/course/react-front-to-back-2022/) by Brad Traversy on Udemy.<br /><br />
-👉 [Click here]() for live demo!<br /><br />
+👉 [Click here](https://agilion.herokuapp.com/) for live demo!<br /><br />
 The project contains all the fundamentals needed to create a MERN Stack Project (MongoDB, ExpressJS, React, NodeJS), including:
 * Advanced React fundamentals such as:
   * Redux toolkit - state management (slices [reducers], useSelector & useDispatch hooks)
